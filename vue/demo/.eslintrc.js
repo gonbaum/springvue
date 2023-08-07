@@ -1,12 +1,18 @@
+/* eslint-disable no-undef */
 module.exports = {
-  parser: "@typescript-eslint/parser",
+  root: true,
+  env: {
+    node: true,
+  },
+  parser: "vue-eslint-parser",
   plugins: ["@typescript-eslint", "vue"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "@vue/eslint-config-typescript",
     "plugin:vue/vue3-recommended",
-    "prettier",
+    "plugin:prettier/recommended",
   ],
   rules: {},
 };
