@@ -1,4 +1,4 @@
-import ActivityService from "../../services/activity-service.ts";
+import ActivityService from "../../services/activity-service.js";
 import { createStore } from "vuex";
 
 const activityStore = {
