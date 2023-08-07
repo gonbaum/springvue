@@ -2,15 +2,15 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "activities-component",
+  name: "ActivitiesComponent",
   computed: {
     ...mapState("activityStore", ["activities"]),
   },
-  methods: {
-    ...mapActions("activityStore", ["fetchActivities"]),
-  },
   async mounted() {
     this.fetchActivities();
+  },
+  methods: {
+    ...mapActions("activityStore", ["fetchActivities"]),
   },
 };
 </script>
