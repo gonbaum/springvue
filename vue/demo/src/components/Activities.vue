@@ -1,8 +1,12 @@
 <script>
 import { mapState, mapActions } from "vuex";
+import ActivityCard from "./ActivityCard.vue";
 
 export default {
   name: "ActivitiesComponent",
+  components: {
+    ActivityCard,
+  },
   computed: {
     ...mapState("activityStore", ["activities"]),
   },
@@ -17,7 +21,16 @@ export default {
 
 <template>
   <div class="activities__container">
-    {{ activities }}
+    <ActivityCard
+      v-for="activity in activities"
+      :key="activity.id"
+      :title="activity.title"
+      :price="activity.price"
+      :currency="activity.currency"
+      :rating="activity.rating"
+      :specialOffer="activity.specialOffer"
+      :supplierId="activity.supplierId"
+    />
   </div>
 </template>
 
