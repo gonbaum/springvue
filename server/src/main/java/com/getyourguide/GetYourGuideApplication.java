@@ -1,4 +1,4 @@
-package com.getyourguide.activity;
+package com.getyourguide;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

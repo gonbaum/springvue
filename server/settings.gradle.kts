@@ -1,1 +1,1 @@
-rootProject.name = "activity"
+rootProject.name = "main.java.com.getyourguide"
