@@ -16,4 +16,5 @@ public class Activity {
   private double rating;
   private boolean specialOffer;
   private Long supplierId;
+  private String supplierName;
 }
