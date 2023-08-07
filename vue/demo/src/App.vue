@@ -1,12 +1,12 @@
 <script>
-import Activities from './components/Activities.vue'
+import Activities from "./components/Activities.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Activities
+    Activities,
   },
-}
+};
 </script>
 
 <template>

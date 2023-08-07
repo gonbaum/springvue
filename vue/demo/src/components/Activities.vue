@@ -1,27 +1,23 @@
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   name: "activities-component",
-  data() {
-    return {
-      activities: [],
-    };
+  computed: {
+    ...mapState("activityStore", ["activities"]),
+  },
+  methods: {
+    ...mapActions("activityStore", ["fetchActivities"]),
   },
   async mounted() {
-    const response = await fetch('http://localhost:8080/activities', {
-      method: "GET",
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    });
-    this.activities = await response.json();
-  }
-}
+    this.fetchActivities();
+  },
+};
 </script>
 
 <template>
   <div class="activities__container">
-    {{activities}}
+    {{ activities }}
   </div>
 </template>
 

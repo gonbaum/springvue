@@ -1,17 +1,33 @@
-import { createStore } from 'vuex'
+import ActivityService from "../../services/activity-service.ts";
+import { createStore } from "vuex";
 
-// Create a new store instance.
+const activityStore = {
+  namespaced: true,
+  state: {
+    activities: [],
+  },
+  mutations: {
+    setActivities(state, activities) {
+      state.activities = activities;
+    },
+  },
+  actions: {
+    async fetchActivities({ commit }) {
+      const activities = await ActivityService.getActivities();
+      commit("setActivities", activities);
+    },
+  },
+  getters: {
+    getAllActivities(state) {
+      return state.activities;
+    },
+  },
+};
+
 const store = createStore({
-    state () {
-        return {
-            activities: [],
-        }
-    },
-    actions: {
-    },
-    mutations: {
-    },
-    getters: {}
-})
+  modules: {
+    activityStore,
+  },
+});
 
 export default store;
