@@ -29,7 +29,7 @@ export default {
       :currency="activity.currency"
       :rating="activity.rating"
       :specialOffer="activity.specialOffer"
-      :supplierId="activity.supplierId"
+      :supplierName="activity.supplierName"
     />
   </div>
 </template>
