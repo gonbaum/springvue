@@ -12,6 +12,7 @@ export default {
 <template>
   <div id="app">
     <h1>Activities</h1>
+    <br />
     <Activities :activities="activities" />
   </div>
 </template>
@@ -20,5 +21,6 @@ export default {
 #app {
   text-align: center;
   color: #2c3e50;
+  margin: 20px;
 }
 </style>

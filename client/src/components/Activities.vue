@@ -46,22 +46,35 @@ export default {
     padding: 0 20px;
   }
   &__activity {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 100%;
     max-width: 300px;
-    margin: 0 20px;
-    padding: 20px;
+    min-width: 300px;
+
+    height: 400px;
+    margin: 10px 10px;
+    padding: 0px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    text-align: center;
+    text-align: left;
     transition: all 0.3s ease-in-out;
     &:hover {
       border: 1px solid #000;
       box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+      cursor: pointer;
     }
+  }
+  &__img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease-in-out;
+  }
+  &__activity:hover &__img {
+    transform: scale(1.2);
   }
 }
 
