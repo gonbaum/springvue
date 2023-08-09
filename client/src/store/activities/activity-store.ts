@@ -16,6 +16,10 @@ const activityStore = {
       const activities = await ActivityService.getActivities();
       commit("setActivities", activities);
     },
+    async searchActivitiesByTitle({ commit }, title) {
+      const activities = await ActivityService.searchActivitiesByTitle(title);
+      commit("setActivities", activities);
+    },
   },
   getters: {
     getAllActivities(state) {

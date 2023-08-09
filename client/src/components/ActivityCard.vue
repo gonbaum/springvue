@@ -1,5 +1,5 @@
 <template>
-  <div class="activities__activity overflow-hidden shadow-lg">
+  <div class="activities__activity overflow-hidden shadow-sm">
     <div class="image-container overflow-hidden">
       <img
         src="@/assets/dummy-image.webp"

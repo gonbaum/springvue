@@ -1,11 +1,18 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import ActivityCard from "./ActivityCard.vue";
+import SearchBar from "./SearchBar.vue";
 
 export default {
   name: "ActivitiesComponent",
   components: {
     ActivityCard,
+    SearchBar,
+  },
+  data() {
+    return {
+      searchQuery: "",
+    };
   },
   computed: {
     ...mapState("activityStore", ["activities"]),
@@ -14,12 +21,20 @@ export default {
     this.fetchActivities();
   },
   methods: {
-    ...mapActions("activityStore", ["fetchActivities"]),
+    ...mapActions("activityStore", [
+      "fetchActivities",
+      "searchActivitiesByTitle",
+    ]),
+    async search(searchText) {
+      this.searchQuery = searchText;
+      await this.searchActivitiesByTitle(searchText);
+    },
   },
 };
 </script>
 
 <template>
+  <SearchBar @search="search" />
   <div class="activities__container">
     <ActivityCard
       v-for="activity in activities"
@@ -31,6 +46,9 @@ export default {
       :specialOffer="activity.specialOffer"
       :supplierName="activity.supplierName"
     />
+    <div v-if="activities.length === 0" class="text-center mt-4 text-gray-500">
+      No results for "{{ searchQuery }}"
+    </div>
   </div>
 </template>
 
@@ -43,7 +61,8 @@ export default {
     justify-content: center;
     margin: 0 auto;
     max-width: 1200px;
-    padding: 0 20px;
+    padding: 20px;
+    row-gap: 0;
   }
   &__activity {
     position: relative;
@@ -82,8 +101,8 @@ export default {
   .activities {
     &__container {
       width: 100%;
-      padding: 0;
-      row-gap: 20px;
+      padding: 20px;
+      row-gap: 0;
     }
   }
 }
