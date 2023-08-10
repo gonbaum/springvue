@@ -19,6 +19,7 @@
           type="text"
           class="py-2 px-4 border-none focus:outline-none flex-grow"
           placeholder="Search activities..."
+          @keyup.enter="performSearch"
         />
         <button
           class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-full"
