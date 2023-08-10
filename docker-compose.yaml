@@ -1,0 +1,19 @@
+version: "3.6"
+services:
+  back:
+    build:
+      context: ./server
+      target: finalApp
+    image: gyg/activities-back
+    container_name: gyg-backend
+    ports:
+      - 8080:8080
+
+  front:
+    build: ./client
+    image: gyg/activities-front
+    container_name: gyg-front
+    ports:
+      - 8081:8081
+    depends_on:
+      - back
