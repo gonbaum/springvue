@@ -16,6 +16,7 @@
       >
         <input
           v-model="searchText"
+          ref="inputFilter"
           type="text"
           class="py-2 px-4 border-none focus:outline-none flex-grow"
           placeholder="Search activities..."
@@ -43,6 +44,7 @@ export default {
   methods: {
     performSearch() {
       this.$emit("search", this.searchText);
+      this.$refs.inputFilter.value = ""; // This will clear that form
     },
   },
 };

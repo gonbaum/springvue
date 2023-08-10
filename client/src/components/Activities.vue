@@ -2,12 +2,14 @@
 import { mapState, mapActions } from "vuex";
 import ActivityCard from "./ActivityCard.vue";
 import SearchBar from "./SearchBar.vue";
+import FilterInfo from "./FilterInfo.vue";
 
 export default {
   name: "ActivitiesComponent",
   components: {
     ActivityCard,
     SearchBar,
+    FilterInfo,
   },
   data() {
     return {
@@ -35,11 +37,18 @@ export default {
       this.fetchError = null;
       try {
         await this.searchActivitiesByTitle(searchText);
+        this.searchText = "";
       } catch (error) {
         this.activities = [];
         this.fetchError =
           "An error occurred while fetching activities. Please try later.";
       }
+    },
+    async clearFilter() {
+      this.searchQuery = "";
+      this.loading = true;
+      await this.fetchActivities();
+      this.loading = false;
     },
   },
 };
@@ -47,6 +56,12 @@ export default {
 
 <template>
   <SearchBar @search="search" />
+  <FilterInfo
+    v-if="searchQuery"
+    :searchQuery="searchQuery"
+    @clear-filter="clearFilter"
+  />
+
   <div class="activities__container">
     <ActivityCard
       v-for="activity in activities"
@@ -58,7 +73,6 @@ export default {
       :specialOffer="activity.specialOffer"
       :supplierName="activity.supplierName"
     />
-    <!-- Display error message if fetchError is not null -->
     <div v-if="fetchError" class="text-center mt-4 text-red-500">
       {{ fetchError }}
     </div>
