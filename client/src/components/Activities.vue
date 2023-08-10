@@ -12,13 +12,18 @@ export default {
   data() {
     return {
       searchQuery: "",
+      fetchError: null, // Initialize fetchError to null
     };
   },
   computed: {
     ...mapState("activityStore", ["activities"]),
   },
   async mounted() {
-    this.fetchActivities();
+    try {
+      await this.fetchActivities();
+    } catch (error) {
+      this.fetchError = "An error occurred while fetching activities.";
+    }
   },
   methods: {
     ...mapActions("activityStore", [
@@ -27,7 +32,14 @@ export default {
     ]),
     async search(searchText) {
       this.searchQuery = searchText;
-      await this.searchActivitiesByTitle(searchText);
+      this.fetchError = null;
+      try {
+        await this.searchActivitiesByTitle(searchText);
+      } catch (error) {
+        this.activities = [];
+        this.fetchError =
+          "An error occurred while fetching activities. Please try later.";
+      }
     },
   },
 };
@@ -46,7 +58,14 @@ export default {
       :specialOffer="activity.specialOffer"
       :supplierName="activity.supplierName"
     />
-    <div v-if="activities.length === 0" class="text-center mt-4 text-gray-500">
+    <!-- Display error message if fetchError is not null -->
+    <div v-if="fetchError" class="text-center mt-4 text-red-500">
+      {{ fetchError }}
+    </div>
+    <div
+      v-if="activities.length === 0 && !fetchError"
+      class="text-center mt-4 text-gray-500"
+    >
       No results for "{{ searchQuery }}"
     </div>
   </div>
