@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       searchQuery: "",
-      fetchError: null, // Initialize fetchError to null
+      fetchError: null,
     };
   },
   computed: {
@@ -46,41 +46,51 @@ export default {
     },
     async clearFilter() {
       this.searchQuery = "";
+      this.fetchError = null;
       this.loading = true;
-      await this.fetchActivities();
-      this.loading = false;
+      try {
+        await this.fetchActivities();
+        this.loading = false;
+      } catch (error) {
+        this.activities = [];
+        this.fetchError =
+          "An error occurred while fetching activities. Please try later.";
+      }
     },
   },
 };
 </script>
 
 <template>
-  <SearchBar @search="search" />
-  <FilterInfo
-    v-if="searchQuery"
-    :searchQuery="searchQuery"
-    @clear-filter="clearFilter"
-  />
-
-  <div class="activities__container">
-    <ActivityCard
-      v-for="activity in activities"
-      :key="activity.id"
-      :title="activity.title"
-      :price="activity.price"
-      :currency="activity.currency"
-      :rating="activity.rating"
-      :specialOffer="activity.specialOffer"
-      :supplierName="activity.supplierName"
+  <div>
+    <SearchBar @search="search" />
+    <FilterInfo
+      v-if="searchQuery"
+      :searchQuery="searchQuery"
+      @clear-filter="clearFilter"
     />
-    <div v-if="fetchError" class="text-center mt-4 text-red-500">
-      {{ fetchError }}
-    </div>
-    <div
-      v-if="activities.length === 0 && !fetchError"
-      class="text-center mt-4 text-gray-500"
-    >
-      No results for "{{ searchQuery }}"
+
+    <div :key="componentKey" class="activities__container">
+      <div v-if="fetchError" class="text-center mt-4 text-red-500">
+        {{ fetchError }}
+      </div>
+      <div
+        v-if="activities.length === 0 && !fetchError"
+        class="text-center mt-4 text-gray-500"
+      >
+        No results for "{{ searchQuery }}"
+      </div>
+
+      <ActivityCard
+        v-for="activity in activities"
+        :key="activity.id"
+        :title="activity.title"
+        :price="activity.price"
+        :currency="activity.currency"
+        :rating="activity.rating"
+        :specialOffer="activity.specialOffer"
+        :supplierName="activity.supplierName"
+      />
     </div>
   </div>
 </template>
