@@ -88,7 +88,7 @@ export default {
         :price="activity.price"
         :currency="activity.currency"
         :rating="activity.rating"
-        :specialOffer="activity.specialOffer"
+        :specialOffer="activity.specialOffer || false"
         :supplierName="activity.supplierName"
       />
     </div>

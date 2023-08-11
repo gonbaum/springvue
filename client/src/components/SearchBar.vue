@@ -44,7 +44,7 @@ export default {
   methods: {
     performSearch() {
       this.$emit("search", this.searchText);
-      this.$refs.inputFilter.value = ""; // This will clear that form
+      this.$refs.inputFilter.value = "";
     },
   },
 };

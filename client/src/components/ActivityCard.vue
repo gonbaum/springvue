@@ -77,7 +77,6 @@ export default defineComponent({
   methods: {
     toggleFavorite() {
       this.isFavorite = !this.isFavorite;
-      console.log(this.isFavorite);
     },
   },
 });

@@ -25,6 +25,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Add styling for the filter info */
-</style>
+<style scoped></style>
